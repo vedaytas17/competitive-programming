@@ -39,16 +39,18 @@ bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
     
     priority_queue <int> pq;
     
-    for(int i = 0;i < K;i++)pq.push(-V[i].second);
+    for(int i = 0;i < K;i++)pq.push(-V[i].second); // Push the exit times for each occupied room. Because, Priority Queue sorts in descending, using the negative.
     
     //for(int i = 0;i < V.size();i++)cout<<V[i].first<<' '<<V[i].second<<endl;
     //cout<<"Done\n";
     int ctr = 0;
     for(int i = K;i < V.size();i++){
+        // Check if rooms can be vacated 
         while(!pq.empty() && (-pq.top()) <= V[i].first){
             ctr++;pq.pop();
         }
         if(V[i].second - V[i].first == 0)continue; //To handle cases, where the person enters and exits the same day and is considered to be invalid.
+        //Check if there aren't enough rooms available.
         if(ctr == 0)return 0;
         ctr--;
         pq.push(-V[i].second);
