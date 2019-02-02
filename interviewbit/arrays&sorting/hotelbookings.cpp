@@ -48,6 +48,7 @@ bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
         while(!pq.empty() && (-pq.top()) <= V[i].first){
             ctr++;pq.pop();
         }
+        if(V[i].second - V[i].first == 0)continue; //To handle cases, where the person enters and exits the same day and is considered to be invalid.
         if(ctr == 0)return 0;
         ctr--;
         pq.push(-V[i].second);
