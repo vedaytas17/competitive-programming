@@ -27,8 +27,8 @@ vector<vector<int> > Solution::generateMatrix(int A) {
         
         for(int j = ln;j <= hn;j++)V[lm][j] = num++;
         for(int i = lm+1;i <= hm;i++)V[i][hn] = num++;
-        for(int j = hn-1;j >= ln;j--)V[hm][j] = num++; //Additional condition  to handle case when there is only 1 row
-        for(int i = hm-1;i > lm;i--)V[i][ln] = num++; //Additional condition to handle case when there is only 1 column
+        for(int j = hn-1;j >= ln;j--)V[hm][j] = num++;
+        for(int i = hm-1;i > lm;i--)V[i][ln] = num++;
         
         lm++;ln++;hm--;hn--;
     }
