@@ -19,6 +19,13 @@ int Solution::strStr(const string A, const string B) {
     //KMP implementation
     
     //LPS array creation
+    /*
+       Notes on LPS creation:
+       lps[i] is, the length of proper suffix that is also the proper prefix, of the substring(0..i). "Proper" prefix/suffix is all possible prefixes/suffixes except for the whole string. 
+       
+       Optimization for preparing the LPS array.
+       Say we maintain 2 pointers p1 and p2. If charAt p1 == charAt p2, the lps value is simply p1+1.. However, if charAt p1 != charAt p2, we have to go back to the point s.t, p1 points to the character (+1th postion) which is the lps for the substring s(0..p2-1).. For going to that position, we have optimized jumps in the code. Debug the code to undertsnad the same.
+    */
     int p1=0,p2=1;
     int lps[B.length()];
     
@@ -33,6 +40,12 @@ int Solution::strStr(const string A, const string B) {
     }
     
     //KMP algorithm:
+    /*
+     Notes :
+      The KMP algorithm uses the LPS array and traverses the text only once. If a mismatch occurs at position 'i' in text(A) and position(j) in Pattern(B), then halt at i, if j is not 0.
+      If j is 0, increment i, meaning the pattern is available only in substring(i+1,...A.length()).
+      If j is not 0, then go back to the position (j = )lps[j-1] and try to match the character at j with i and so on...
+    */
     int j = 0,i;
     for(i = 0;i < A.length();){
         if(j == B.length())return i-B.length();
